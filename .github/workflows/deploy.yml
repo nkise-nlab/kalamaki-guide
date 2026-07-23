@@ -23,6 +23,12 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
+      - name: Cache map assets
+        uses: actions/cache@v4
+        with:
+          path: public/map
+          key: map-assets-v1
+      - run: bun run fetch-map
       - run: bun run build
       - uses: actions/configure-pages@v5
         with:

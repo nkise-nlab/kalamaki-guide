@@ -1,5 +1,7 @@
 node_modules
 dist
+# fetched by scripts/fetch-map.ts in CI
+public/map/
 .env
 .env.*
 *.local

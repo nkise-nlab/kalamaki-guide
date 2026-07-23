@@ -1,5 +1,6 @@
 import { withBase } from './base'
-import { TOURPACK_CACHE } from './pmtiles-source'
+
+export const TOURPACK_CACHE = 'tourpack-v1'
 
 export interface PackEntry {
   url: string

@@ -1,13 +1,11 @@
 import { useEffect, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { Protocol } from 'pmtiles'
-import type { Feature, FeatureCollection } from 'geojson'
 import { layers, namedFlavor } from '@protomaps/basemaps'
+import type { Feature, FeatureCollection } from 'geojson'
 import type { Poi } from '../data/pois'
 import type { Fix } from '../lib/geo'
-import { withBase, withAbsBase } from '../lib/base'
-import { loadPmtiles } from '../lib/pmtiles-source'
+import { withAbsBase } from '../lib/base'
 
 interface Props {
   pois: readonly Poi[]
@@ -47,81 +45,70 @@ export default function MapView({ pois, fix, visitedTick, isVisited, onSelect }:
     const container = containerRef.current
     if (!container || mapRef.current) return
 
-    const protocol = new Protocol()
-    maplibregl.addProtocol('pmtiles', protocol.tile)
+    const map = new maplibregl.Map({
+      container,
+      center: TOWN_CENTER,
+      zoom: 15,
+      minZoom: 8,
+      maxZoom: 19,
+      attributionControl: { compact: true },
+      style: {
+        version: 8,
+        glyphs: withAbsBase('map/fonts/{fontstack}/{range}.pbf'),
+        sprite: withAbsBase('map/sprites/light'),
+        sources: {
+          protomaps: {
+            type: 'vector',
+            // Plain static tiles committed at build time; the service worker
+            // serves them from the tour-pack cache when offline. Missing
+            // tiles (outside the downloaded area) just render empty.
+            tiles: [withAbsBase('map/tiles/{z}/{x}/{y}.mvt')],
+            minzoom: 0,
+            maxzoom: 15, // MapLibre overzooms z15 data up to maxZoom
+            attribution: '© OpenStreetMap contributors, Protomaps',
+          },
+        },
+        layers: layers('protomaps', namedFlavor('light'), { lang: 'en' }),
+      },
+    })
+    mapRef.current = map
 
-    let cancelled = false
-    void (async () => {
-      let mapReady = false
-      try {
-        const pm = await loadPmtiles(withBase('map/zakynthos.pmtiles'), 'zakynthos')
-        protocol.add(pm)
-        mapReady = true
-      } catch (e) {
-        console.error('pmtiles load failed', e)
-      }
-      if (cancelled) return
+    map.on('dragstart', () => {
+      followRef.current = false
+    })
 
-      const map = new maplibregl.Map({
-        container,
-        center: TOWN_CENTER,
-        zoom: 15,
-        minZoom: 11,
-        maxZoom: 19,
-        attributionControl: { compact: true },
-        style: mapReady
-          ? {
-              version: 8,
-              glyphs: withAbsBase('map/fonts/{fontstack}/{range}.pbf'),
-              sprite: withAbsBase('map/sprites/light'),
-              sources: {
-                protomaps: {
-                  type: 'vector',
-                  url: 'pmtiles://zakynthos',
-                  attribution: '© OpenStreetMap contributors, Protomaps',
-                },
-              },
-              layers: layers('protomaps', namedFlavor('light'), { lang: 'en' }),
-            }
-          : { version: 8, sources: {}, layers: [] },
+    map.on('load', () => {
+      map.addSource('accuracy', { type: 'geojson', data: emptyFC() })
+      map.addLayer({
+        id: 'accuracy-fill',
+        type: 'fill',
+        source: 'accuracy',
+        paint: { 'fill-color': '#4aa3ff', 'fill-opacity': 0.15 },
       })
-      mapRef.current = map
+    })
 
-      map.on('dragstart', () => {
-        followRef.current = false
+    // Tiles outside the offline pack 404 — that's expected, don't spam.
+    map.on('error', (e) => {
+      if (!/tile/i.test(e.error?.message ?? '')) console.error(e.error)
+    })
+
+    for (const poi of pois) {
+      const el = document.createElement('button')
+      el.className = 'poi-marker'
+      el.textContent = String(poi.order)
+      el.addEventListener('click', (e) => {
+        e.stopPropagation()
+        onSelect(poi)
       })
-
-      map.on('load', () => {
-        map.addSource('accuracy', { type: 'geojson', data: emptyFC() })
-        map.addLayer({
-          id: 'accuracy-fill',
-          type: 'fill',
-          source: 'accuracy',
-          paint: { 'fill-color': '#4aa3ff', 'fill-opacity': 0.15 },
-        })
-      })
-
-      // POI markers
-      for (const poi of pois) {
-        const el = document.createElement('button')
-        el.className = 'poi-marker'
-        el.textContent = String(poi.order)
-        el.addEventListener('click', (e) => {
-          e.stopPropagation()
-          onSelect(poi)
-        })
-        const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
-          .setLngLat([poi.lng, poi.lat])
-          .addTo(map)
-        poiMarkersRef.current.set(poi.id, { marker, el })
-      }
-    })()
+      const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+        .setLngLat([poi.lng, poi.lat])
+        .addTo(map)
+      poiMarkersRef.current.set(poi.id, { marker, el })
+    }
 
     return () => {
-      cancelled = true
-      mapRef.current?.remove()
+      map.remove()
       mapRef.current = null
-      maplibregl.removeProtocol('pmtiles')
       poiMarkersRef.current.clear()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
