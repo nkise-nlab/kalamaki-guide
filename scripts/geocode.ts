@@ -18,6 +18,12 @@ const QUERY = `
   nwr["name"~"Ρώμα|Roma",i](37.77,20.88,37.80,20.91);
   nwr["name"~"Χρυσοπηγή",i](37.78,20.87,37.81,20.91);
   nwr["tourism"="viewpoint"](37.788,20.885,37.797,20.90);
+  nwr["name"~"Φανερωμένη|Faneromeni",i](37.77,20.88,37.80,20.91);
+  nwr["name"~"Ξενόπουλο|Xenopoulos",i](37.77,20.88,37.80,20.91);
+  nwr["name"~"Φώσκολο|Foscolo|Foskolos",i](37.77,20.88,37.80,20.91);
+  nwr["name"~"Κυρία των Αγγέλων|Lady of the Angels|Angelon",i](37.77,20.88,37.80,20.91);
+  nwr["name"~"Εθνική Τράπεζα|National Bank",i](37.77,20.88,37.80,20.91);
+  nwr["amenity"="bank"](37.782,20.893,37.790,20.901);
 );
 out center tags;
 `
