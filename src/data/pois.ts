@@ -18,6 +18,8 @@ export interface Poi {
 /** Welcome track played on "Start tour" (also unlocks iOS audio). */
 export const INTRO_AUDIO = 'audio/intro.mp3'
 
+export const INTRO_TRANSCRIPT = 'Placeholder — pending research.'
+
 // PLACEHOLDER data — coordinates and transcripts are being replaced with
 // researched, verified content. Do not ship until updated.
 export const POIS: readonly Poi[] = [

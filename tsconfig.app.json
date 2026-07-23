@@ -23,5 +23,6 @@
     "noUncheckedSideEffectImports": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "data"]
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
 }
