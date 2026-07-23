@@ -23,8 +23,6 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
-      # Temporary: print OSM coordinates for POIs (read from workflow log)
-      - run: bun run scripts/geocode.ts || true
       - name: Cache map assets
         uses: actions/cache@v4
         with:
