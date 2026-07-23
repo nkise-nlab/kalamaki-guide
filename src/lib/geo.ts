@@ -84,7 +84,7 @@ export class GeofenceTracker {
   /** Process a fix. Returns the POI to trigger, or null. */
   update(fix: Fix): Poi | null {
     if (fix.accuracy > this.accuracyMaxM) return null
-    let triggered: Poi | null = null
+    const candidates: Array<{ poi: Poi; dist: number }> = []
     for (const poi of this.pois) {
       const st = this.state.get(poi.id)
       if (!st) continue
@@ -99,16 +99,26 @@ export class GeofenceTracker {
       if (dist <= poi.radiusM) {
         st.hits += 1
         if (st.hits >= this.confirmFixes) {
-          st.inside = true
-          if (!this.visited.has(poi.id) && triggered === null) {
-            triggered = poi
+          if (this.visited.has(poi.id)) {
+            st.inside = true
+          } else {
+            candidates.push({ poi, dist })
           }
         }
       } else {
         st.hits = 0
       }
     }
-    return triggered
+    // Geofences can overlap (e.g. the Bochali climb). Trigger only the
+    // nearest; the others keep their confirmed hit count and stay armed, so
+    // they fire on a later fix instead of being silently swallowed.
+    if (candidates.length === 0) return null
+    candidates.sort((a, b) => a.dist - b.dist)
+    const winner = candidates[0]
+    if (!winner) return null
+    const st = this.state.get(winner.poi.id)
+    if (st) st.inside = true
+    return winner.poi
   }
 }
 

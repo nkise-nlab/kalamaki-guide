@@ -108,6 +108,18 @@ describe('GeofenceTracker', () => {
     expect(t.update(NEAR)?.id).toBe('test')
   })
 
+  test('overlapping geofences: nearest triggers first, other stays armed', () => {
+    store.clear()
+    const poiB: Poi = { ...POI, id: 'b', lat: POI.lat + 0.0005, radiusM: 80 } // ~55 m north
+    const t = new GeofenceTracker([POI, poiB])
+    // stand at POI center — inside both fences (b is 55 m away, radius 80)
+    const at = fix(POI.lat, POI.lng)
+    expect(t.update(at)).toBeNull()
+    expect(t.update(at)?.id).toBe('test') // nearest wins
+    // next fix: b is still armed and fires
+    expect(t.update(at)?.id).toBe('b')
+  })
+
   test('visited state persists across tracker instances', () => {
     const t = freshTracker()
     t.update(NEAR)
