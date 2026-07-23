@@ -97,7 +97,8 @@ export default function App() {
     if (!triggered) return
     t.markVisited(triggered.id)
     setVisitedTick((n) => n + 1)
-    const playing = !audio.getState().paused
+    const st = audio.getState()
+    const playing = st.nowPlaying !== null && !st.paused && !st.ended
     if (playing) {
       queueRef.current.push(triggered)
       setToast(`Coming up: ${triggered.name}`)

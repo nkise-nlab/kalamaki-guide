@@ -32,10 +32,7 @@ function notify(): void {
 let nowPlaying: NowPlaying | null = null
 
 for (const ev of ['play', 'pause', 'ended', 'timeupdate', 'durationchange'] as const) {
-  player.addEventListener(ev, () => {
-    if (ev === 'ended') nowPlaying = nowPlaying // keep metadata; UI decides
-    notify()
-  })
+  player.addEventListener(ev, notify)
 }
 
 export function getState() {
@@ -81,6 +78,9 @@ export async function playPoi(poi: Poi): Promise<boolean> {
     notify()
     return true
   } catch {
+    // play() flips paused=false synchronously even when it rejects — pause()
+    // restores a truthful state so the app doesn't think audio is running.
+    player.pause()
     nowPlaying = null
     notify()
     return false
@@ -97,6 +97,7 @@ export async function playTrack(assetPath: string, title: string, id = 'intro'):
     notify()
     return true
   } catch {
+    player.pause()
     nowPlaying = null
     notify()
     return false
