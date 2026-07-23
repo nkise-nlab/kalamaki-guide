@@ -20,7 +20,7 @@ export const INTRO_AUDIO = 'audio/intro.mp3'
 
 export const INTRO_TRANSCRIPT = `Yia sou! Welcome to Zakynthos Town — or as the Venetians called this whole island, the Flower of the East.
 
-Here's how this works. Keep me in your pocket, keep your eyes on the town. As you walk, I'll notice when you get close to one of the eleven stops, and I'll simply start talking. No tapping, no reading, no craning at your screen — just walk. If you'd rather browse, every stop is on the map and in the list, one tap to play.
+Here's how this works. Keep me in your pocket, keep your eyes on the town. As you walk, I'll notice when you get close to one of the fifteen stops, and I'll simply start talking. No tapping, no reading, no craning at your screen — just walk. If you'd rather browse, every stop is on the map and in the list, one tap to play.
 
 Everything is stored on your phone, so I work with no signal at all — up on the castle hill, out on the pier, anywhere.
 
@@ -53,8 +53,29 @@ He died in 1622. When they exhumed the body three years on, it hadn't decayed �
 One practical note: shoulders and knees covered inside, and the church usually rests in the early afternoon, like everyone sensible in Greece. And notice this building survived 1953 almost untouched — hold that thought; it's a story we'll finish downtown.`,
   },
   {
-    id: 'harbor',
+    id: 'faneromeni',
     order: 2,
+    name: 'Faneromeni Quarter',
+    nameEl: 'Παναγία Φανερωμένη / Συνοικία Φανερωμένης',
+    lat: 37.77885,
+    lng: 20.89635,
+    radiusM: 65,
+    audio: 'audio/faneromeni.mp3',
+    photo: null,
+    tagline: 'The grandest church of old Zante — and the storyteller next door',
+    transcript: `A few quiet blocks inland from the port, you're in the Faneromeni quarter — and in front of what was, for three centuries, the most splendid church in Zakynthos. Some said in all of Greece.
+
+Panagia Faneromeni — the Virgin Revealed. Founded in the fifteenth century; tradition says it began with a small icon of the Virgin found washed up on the beach — a legend, but a lovely one for a harbor town. By 1644, under Venice, it had grown into a jewel box: ceiling paintings by Nikolaos Doxaras and his students, masters of that Ionian school you'll hear more about at the museum, and a wood-carved icon screen made in 1659 by a Cretan craftsman named Manos Maganiaris. Grand tour travelers made detours for this building.
+
+Then August 1953. The church collapsed and burned with the rest of the town — of the famous interior, only fragments were pulled from the ashes, and you can stand in front of them today in the Museum of Zakynthos on the main square. The church itself was rebuilt in its old form, stone by stone. Notice the bell tower: the old one was the only piece left standing, an oriental-looking oddity locals loved — the rebuilt campanile still watches over the same lanes.
+
+And one street over lived a man you should know: Grigorios Xenopoulos. Novelist, playwright, one of the fathers of modern Greek fiction — and for fifty-two years, from 1896 to 1948, the editor and beating heart of a children's magazine called "The Molding of Children," which taught generations of Greek kids to love reading. He grew up here, put this town into novel after novel, and died in January 1951 — mercifully, two years before his beloved streets were erased. His family house on Gaita street is now a small museum, weekday mornings, full of the furniture and manuscripts of a vanished bourgeois Zakynthos.
+
+Solomos, Kalvos, Foscolo, Xenopoulos. One small town. The literary scoreboard here is honestly getting embarrassing for everyone else. Now — back toward the water, and north along the harbor.`,
+  },
+  {
+    id: 'harbor',
+    order: 3,
     name: 'The Harbor & Strata Marina',
     nameEl: 'Λιμάνι / Οδός Λομβάρδου',
     lat: 37.783,
@@ -77,7 +98,7 @@ It has, of course. More than almost any town in Europe. Keep walking toward the 
   },
   {
     id: 'solomos-square',
-    order: 3,
+    order: 4,
     name: 'Solomos Square',
     nameEl: 'Πλατεία Σολωμού',
     lat: 37.78695,
@@ -97,12 +118,35 @@ Now turn slowly where you stand, because this square is a time machine with thre
 By the way, Solomos isn't the only poet from this little town. Ugo Foscolo — Italy's national poet — was born a few streets from here in 1778. One provincial harbor town, the national poets of two different nations. There's something in the water here. Or possibly in the wine.`,
   },
   {
+    id: 'national-bank',
+    order: 5,
+    name: 'The National Bank Building',
+    nameEl: 'Κτίριο Εθνικής Τράπεζας',
+    lat: 37.78667,
+    lng: 20.89925,
+    radiusM: 35,
+    audio: 'audio/national-bank.mp3',
+    photo: null,
+    tagline: 'The third survivor',
+    transcript: `Remember the arithmetic of August 1953? An entire Venetian city reduced to three standing buildings. You've already met two of them — the church of Saint Dionysios by the port, and the little stone church of Saint Nicholas on the square behind you. Here, just off the square, is the third. A bank.
+
+Yes — a saint, a sailor's chapel, and a bank. Insert your own joke about what this town valued; the locals certainly have.
+
+Look at the facade. This is real nineteenth-century neoclassical stonework — not the 1950s concrete tribute you've been walking past all morning, but the thing itself: original window surrounds, original proportions, a building that simply refused. While everything around it pancaked and burned, the bank stood — which is why it could be restored to exactly its pre-earthquake self rather than rebuilt from photographs. Run your eye along the square: this is the only large secular building in the whole town center that Solomos or Xenopoulos would still recognize at a glance.
+
+Why did it survive? Sober masonry, good foundations, a bit of luck — the same recipe as the two churches. For the record, some old-timers stretch the survivors' list a little further, adding a school building out in the Ammos district and a mansion beyond the town — but "the three survivors" is how the story is told here, and standing before number three, you've now completed the set.
+
+There's something quietly moving about it, too. In the weeks after the quake, with the town in ashes and half its people sleeping in tents, this building meant records, savings, proof of who owned what — the paper skeleton of a community that had lost its body. The town rebuilt itself around exactly these survivors, like flesh around bones.
+
+The museum with the rescued icons is a few steps north — if you haven't been in yet, now's the moment.`,
+  },
+  {
     id: 'byzantine-museum',
-    order: 4,
+    order: 6,
     name: 'Museum of Zakynthos (Byzantine Museum)',
     nameEl: 'Μουσείο Ζακύνθου',
-    lat: 37.7873,
-    lng: 20.89967,
+    lat: 37.78732,
+    lng: 20.89955,
     radiusM: 35,
     audio: 'audio/byzantine-museum.mp3',
     photo: null,
@@ -119,11 +163,11 @@ Practical bits: it's a few euros to enter, it keeps state-museum hours — morni
   },
   {
     id: 'agios-nikolaos-molou',
-    order: 5,
+    order: 7,
     name: 'Agios Nikolaos tou Molou',
     nameEl: 'Άγιος Νικόλαος του Μώλου',
-    lat: 37.7876,
-    lng: 20.9001,
+    lat: 37.78694,
+    lng: 20.90058,
     radiusM: 50,
     audio: 'audio/agios-nikolaos-molou.mp3',
     photo: null,
@@ -137,8 +181,27 @@ One more thread ties this spot to the start of your walk: a young priest served 
 Now do one thing for me. Look at this church's rough Renaissance stonework — then look across at the smooth pale arcades around the square. Same style, same arches. But one is 1561 stone and the rest is 1950s reinforced concrete, rebuilt from old photographs. That contrast — the original and the loving replica standing side by side — is the whole story of modern Zakynthos in a single glance. The full earthquake story is coming two stops from now, in the arcades where it's best told.`,
   },
   {
+    id: 'kyria-angelon',
+    order: 8,
+    name: 'Kyria ton Angelon — Our Lady of the Angels',
+    nameEl: 'Κυρία των Αγγέλων',
+    lat: 37.7895,
+    lng: 20.89976,
+    radiusM: 45,
+    audio: 'audio/kyria-angelon.mp3',
+    photo: null,
+    tagline: 'The notaries’ church — and the town that organizes itself',
+    transcript: `This small church, Our Lady of the Angels, was built in 1687 — and here's the detail I love: it wasn't built by a bishop or a noble family. It was built by the guild of notaries. The town's contract-writers and will-stampers pooled their fees and raised a church, the way the sailors' guild had raised Saint Nicholas down on the square a century earlier. In old Zakynthos, if your profession mattered, it had its own church — holiness with a membership list.
+
+And they built well. Look at the carved stone facade, and find the reliefs — the Virgin among angels, and on the bell tower, older carved plaques including a double-headed eagle and the Archangel Michael. Inside, when it's open, there's a gilded wood-carved icon screen with icons attributed to the Doxaras workshop — the family that dragged Greek painting out of the Byzantine ice and into warm Italian light. The 1953 earthquake flattened this church like nearly everything else; the town rebuilt it from its own stones, carvings and all.
+
+That instinct — organize yourselves, don't wait for permission — is maybe the most Zakynthian thing there is, so let me give you the best example. In 1816, the town wanted a brass band for Saint Dionysios's procession and asked the British garrison to lend theirs. The British said no. So the Zakynthians, magnificently offended, founded their own — the Philharmonic, the first in all of Greece, more than two centuries old and still teaching local kids music for free. Every other band in the country is, musically speaking, this one's grandchild. It's why brass on a warm evening is simply part of the local weather, along with the kantades — those mandolin-and-guitar serenades men still sing in taverna corners, a habit soaked up from Italian bel canto and never given back.
+
+And if you're ever here at Easter: at the First Resurrection, this town celebrates by hurling clay pots to smash on the squares. Faith, joy, and controlled demolition — Zakynthos in one custom.`,
+  },
+  {
     id: 'agios-markos',
-    order: 6,
+    order: 9,
     name: 'Agios Markos Square',
     nameEl: 'Πλατεία Αγίου Μάρκου',
     lat: 37.7883,
@@ -157,7 +220,7 @@ At the museum entrance, look for a piece of old tree trunk. Remember it. It come
   },
   {
     id: 'roma-mansion',
-    order: 7,
+    order: 10,
     name: 'Alexandrou Roma Street & Roma Mansion',
     nameEl: 'Οδός Αλεξάνδρου Ρώμα / Αρχοντικό Ρώμα',
     lat: 37.78649,
@@ -176,7 +239,7 @@ And the street it stands on carries a name worth pausing over: Loukas Karrer was
   },
   {
     id: 'rouga-1953',
-    order: 8,
+    order: 11,
     name: 'The Arcades & the Great Earthquake',
     nameEl: 'Η Ρούγα & οι Σεισμοί του 1953',
     lat: 37.78548,
@@ -194,13 +257,32 @@ The first help came from the sea, the very next day: British warships, Americans
 Then Zakynthos did something remarkable: instead of throwing up cheap emergency blocks, it rebuilt itself as itself — architects working from photographs and old plans, recreating the Venetian facades and these arcades in earthquake-proof concrete. So no, this street isn't "authentic." It's better. It's a town that refused to let its face be taken. Now — uphill. The castle is calling, and the view will reorganize everything you've just seen.`,
   },
   {
+    id: 'foscolo',
+    order: 12,
+    name: 'Casa Ugo Foscolo & the Weeping Angel',
+    nameEl: 'Οικία Ούγκο Φώσκολο',
+    lat: 37.78471,
+    lng: 20.89751,
+    radiusM: 45,
+    audio: 'audio/foscolo.mp3',
+    photo: null,
+    tagline: 'Italy’s national poet, born on this street',
+    transcript: `On this street in 1778, in a house on this very spot, Italy's national poet was born. Not Greece's — Italy's. Ugo Foscolo, son of a Venetian father and a Greek mother, baptized here as little Niccolò before the world knew him as anything at all.
+
+He left as a boy, chased revolutions and Napoleon across Italy, wrote the poems every Italian schoolchild still memorizes — and never once managed to come home. His most famous sonnet, "A Zacinto" — "To Zante" — is this island's love letter written from exile: never again shall I touch your sacred shores, my Zakynthos, where my child's body lay. He predicted he would die far away, in an unwept grave. He was right on the geography: he died poor in London in 1827. He was wrong about unwept — Italy later carried him home in state to Santa Croce in Florence, to lie among Michelangelo and Galileo.
+
+Zakynthos never forgot its Italian son. Look for the marble cenotaph here with its Weeping Angel — a mourning figure draped over a memorial for the poet who mourned this island his whole life. The house itself, like almost everything, is a post-1953 reconstruction, faithfully rebuilt with his memorabilia inside; there's a bust of him up on Solomos Square too, a few steps from Solomos himself. Two national poets of two nations, born a few hundred meters apart.
+
+And his name is stitched into the town another way. The old municipal theater — designed in the 1870s by Ernst Ziller, the great architect of neoclassical Athens — was named the "Foskolos." It was wrecked by the earthquake of 1893, rebuilt to Ziller's identical plans in 1903, filled with opera and operetta for half a century in a town mad for music... and then 1953 took it for good. On the facade of the Cultural Center that replaced it, they mounted the salvaged capitals of the old theater's pilasters — go look, later: actual pieces of the opera house, worn like medals on its successor's chest.`,
+  },
+  {
     id: 'pikridiotissa',
-    order: 9,
+    order: 13,
     name: 'Panagia Pikridiotissa & the Climb',
     nameEl: 'Παναγία Πικριδιώτισσα',
-    lat: 37.79,
-    lng: 20.8935,
-    radiusM: 90,
+    lat: 37.78686,
+    lng: 20.89472,
+    radiusM: 70,
     audio: 'audio/pikridiotissa.mp3',
     photo: null,
     tagline: 'Where Dionysus may sleep under the Virgin',
@@ -216,7 +298,7 @@ Turn around at the church terrace before you go on. That's your first proper aer
   },
   {
     id: 'bochali-castle',
-    order: 10,
+    order: 14,
     name: 'Bochali Hill & the Venetian Castle',
     nameEl: 'Μπόχαλη / Ενετικό Κάστρο',
     lat: 37.78955,
@@ -237,7 +319,7 @@ One more stop. A quiet hill just beyond, where a young man sat under a tree and 
   },
   {
     id: 'strani-hill',
-    order: 11,
+    order: 15,
     name: 'Strani Hill',
     nameEl: 'Λόφος Στράνη',
     lat: 37.79683,
