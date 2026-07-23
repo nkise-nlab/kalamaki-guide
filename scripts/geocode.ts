@@ -24,6 +24,9 @@ const QUERY = `
   nwr["name"~"Κυρία των Αγγέλων|Lady of the Angels|Angelon",i](37.77,20.88,37.80,20.91);
   nwr["name"~"Εθνική Τράπεζα|National Bank",i](37.77,20.88,37.80,20.91);
   nwr["amenity"="bank"](37.782,20.893,37.790,20.901);
+  nwr["amenity"="place_of_worship"](37.774,20.885,37.792,20.902);
+  nwr["tourism"="museum"](37.774,20.885,37.792,20.902);
+  nwr["historic"](37.774,20.885,37.792,20.902);
 );
 out center tags;
 `
