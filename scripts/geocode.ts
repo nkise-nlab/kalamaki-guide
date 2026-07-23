@@ -25,7 +25,12 @@ out center tags;
 const resp = await fetch('https://overpass-api.de/api/interpreter', {
   method: 'POST',
   body: 'data=' + encodeURIComponent(QUERY),
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    // Overpass rejects requests without a proper UA/Accept with 406
+    'User-Agent': 'kalamaki-guide-audio-tour/1.0 (one-off POI geocoding)',
+    Accept: 'application/json',
+  },
 })
 if (!resp.ok) {
   console.error('Overpass failed:', resp.status, await resp.text())
