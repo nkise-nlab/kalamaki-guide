@@ -61,8 +61,23 @@ async function generate(id: string, text: string): Promise<void> {
 }
 
 await mkdir(OUT_DIR, { recursive: true })
-await generate('intro', INTRO_TRANSCRIPT)
-for (const poi of POIS) {
-  await generate(poi.id, poi.transcript)
+const failed: string[] = []
+const jobs: Array<[string, string]> = [
+  ['intro', INTRO_TRANSCRIPT],
+  ...POIS.map((p): [string, string] => [p.id, p.transcript]),
+]
+for (const [id, text] of jobs) {
+  try {
+    await generate(id, text)
+  } catch (e) {
+    // Keep going — partial results still get committed, and a re-run
+    // (FORCE=0) only spends credits on what's missing.
+    failed.push(id)
+    console.error(String(e))
+  }
 }
-console.log('All audio generated.')
+if (failed.length > 0) {
+  console.error(`FAILED (${failed.length}/${jobs.length}): ${failed.join(', ')}`)
+}
+if (failed.length === jobs.length) process.exit(1)
+console.log('Done.')
