@@ -1,5 +1,8 @@
 name: Generate audio guides
 
+# workflow_dispatch only works once this file is on the default branch, so
+# generation can also be triggered by pushing a commit whose message
+# contains [generate-audio] (add [force-audio] to regenerate everything).
 on:
   workflow_dispatch:
     inputs:
@@ -7,12 +10,15 @@ on:
         description: 'Regenerate all files (1 = yes)'
         required: false
         default: '0'
+  push:
+    branches: [main, claude/zakynthos-audio-guide-app-52q2v3]
 
 permissions:
   contents: write
 
 jobs:
   generate:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[generate-audio]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +29,7 @@ jobs:
       - run: bun run generate-audio
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-          FORCE: ${{ inputs.force }}
+          FORCE: ${{ (inputs.force == '1' || contains(github.event.head_commit.message, '[force-audio]')) && '1' || '0' }}
       - name: Commit MP3s
         run: |
           git config user.name "github-actions[bot]"
