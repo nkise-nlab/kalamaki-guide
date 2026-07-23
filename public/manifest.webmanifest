@@ -1,0 +1,16 @@
+{
+  "name": "Zante Audio Guide — Zakynthos Town",
+  "short_name": "Zante Guide",
+  "description": "Offline self-guided audio walking tour of Zakynthos Town",
+  "start_url": "/kalamaki-guide/",
+  "scope": "/kalamaki-guide/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1b2a",
+  "theme_color": "#0d1b2a",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
